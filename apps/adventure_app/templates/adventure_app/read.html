@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page Title</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'adventure_app/css/style.css' %}">    
+<!-- <script src="{% static 'adventure_app/js/script.js' %}"></script> -->
+</head>
+<body>
+<!-- <img src="{% static 'adventure_app/images/image.jpg' %}" /> -->
+<div class = "container" >
+    <div class= "upper">
+        
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}</div>
+
+
+    <div class = "text_left"> 
+       <div class="row">           
+           <div class="col-6">            
+                <h1>Welcome Lovely Pirate {{this_pirate_template.first_name}} {{this_pirate_template.last_name}}  to the Page to Read the Details of the Adventure</h1>
+                
+            </div>
+       </div>
+       <div class="row">
+            <div class="col-6">
+
+                    <a href="/pirates_adventure/dashboard">Dashboard</a>
+                    <a href= "/logout"> logoff</a>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+    <div class = "middle">
+        <div class="row">           
+            <div class="col-6">
+                <table class = "table">
+                        <thead>Your Adventures!:  </thead>
+                        <th>Name:  </th>
+                        <th>Destination:  </th>
+                        <th>Plan:  </th>
+                        <th>Start Date:  </th>
+                        <th>End Date:  </th>
+                        <th>Pirate Hosting this Adventure:  </th>
+                        <th>Pirates Attending this Adventure:  </th>
+
+
+                        <tr>                     
+                            <td>{{this_adv_template.name}}</td> 
+                            <td>{{this_adv_template.destination}}</td> 
+                            <td>{{this_adv_template.plan}}</td> 
+                            <td>{{this_adv_template.start_date}}</td> 
+                            <td>{{this_adv_template.end_date}}</td>
+                            <td>{{this_adv_template.hosting_adventure.first_name}}  {{this_adv_template.hosting_adventure.last_name}}</td>
+                            <td>{% for b in this_adv_template.attending_adventure.all %}
+                                    {{b.first_name}}  {{b.last_name}}
+                                {% endfor %}
+                            </td>                        </tr>
+                     </table>  
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="text_right">
+        <div class="row">           
+            <div class="col-6">            
+                 
+             </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>    
+</body>
+</html>

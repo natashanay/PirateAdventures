@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pirates Adventures Dashboard</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% load static %}
+<link rel="stylesheet" href="{% static 'adventure_app/css/style.css' %}">    
+<!-- <script src="{% static 'adventure_app/js/script.js' %}"></script> -->
+<!-- <img src="{% static 'adventure_app/images/image.jpg' %}" /> -->
+
+</head>
+<body>
+<div class = "container">
+    <div class= "upper">
+        
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+
+
+    <div class = "text_left"> 
+       <div class="row">           
+           <div class="col-6">            
+                <h3>Welcome Lovely Pirate {{this_pirate_template.first_name}} {{this_pirate_template.last_name}}   to Your Pirate Dashboard</h3>
+                
+            </div>
+            <div class="col-6">  
+                    <form action="adventures/new" method="POST">
+                        {% csrf_token %}
+                        <p><a href= "/logout"> Logout   </a>    
+
+                        <input type="submit" value="Create a New Adventure!">
+                        </p>
+
+                    </form>
+                </div>
+       </div>
+
+    </div>
+
+    <div class = "middle">
+        <div class="row">           
+            <div class="col-6">
+                <table class = "table">
+                    <thead>Adventures You are Attending!:  </thead>
+                    <th>Name:  </th>
+                    <th>Destination:  </th>
+                    <th>Start Date:  </th>
+                    <th>End Date:  </th>
+                    <th>Pirates Hosting this Adventure:  </th>
+                    <th>Pirates Attending this Adventure:  </th>
+                    <th>Actions:  </th>
+
+                    {% for a in attend_list %}
+                    <tr>                     
+                        <td>{{a.name}}</td> 
+                        <td><a href= "/pirates_adventure/adventures/{{a.id}}">{{a.destination}}</a></td>
+                        <td>{{a.start_date}}</td> 
+                        <td>{{a.end_date}}</td>
+                        <td>{{a.hosting_adventure.first_name}}  {{a.hosting_adventure.last_name}}</td>
+                        <td>{% for b in a.attending_adventure.all %}
+                                {{b.first_name}}  {{b.last_name}}
+                            {% endfor %}
+                        </td>
+
+                        <td><a href="edit/{{a.id}}">Edit</a>
+                            <a href="cancelAdventure/{{a.id}}">Cancel</a></td> 
+                    </tr>
+ 
+                    {% endfor %}
+
+                </table>  
+            </div>
+        </div>
+    </div>
+
+    <div class = "mid-low">
+        <div class="row">
+            <div class = "col-6">
+                <table class = "table">
+                    <thead>Adventures You are Hosting:</thead>
+                    <th>Name:  </th>
+                    <th>Destination:  </th>
+                    <th>Start Date:  </th>
+                    <th>End Date:  </th>
+                    <th>Pirates Hosting this Adventure:  </th>
+                    <th>Pirates Attending this Adventure:  </th>
+                   <th>Actions:  </th>
+
+                    {% for a in host_list %}
+                    <tr>                     
+                        <td>{{a.name}}</td> 
+                        <td><a href= "/pirates_adventure/adventures/{{a.id}}">{{a.destination}}</a></td>
+                        <td>{{a.start_date}}</td> 
+                        <td>{{a.end_date}}</td>
+                        <td>{{a.hosting_adventure.first_name}}  {{a.hosting_adventure.last_name}}</td>
+                        <td>{% for b in a.attending_adventure.all %}
+                                {{b.first_name}}  {{b.last_name}}
+                            {% endfor %}
+                        </td>
+                        <td><a href="edit/{{a.id}}">Edit:</a></td>
+                        <td><a href="removeAdventure/{{a.id}}">Remove:</a>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class = "lower">
+            <div class="row">           
+                <div class="col-6">
+                    <table class = "table">
+                        <thead>Other Pirate Adventures!:  </thead>
+                        <th>Name: </th>
+                        <th>Destination:  </th>
+                        <th>Start Date:  </th>
+                        <th>End Date:  </th>
+                        <th>Pirates Hosting this Adventure:  </th>
+                        <th>Pirates Attending this Adventure:  </th>
+                        <th>Want To Join:  </th>
+
+                        <br>
+                       
+                        {% for a in other_pirate_adventures_template %}
+                        <tr> 
+                            <td>{{a.name}}</td>
+                            <td><a href= "/pirates_adventure/adventures/{{a.id}}">{{a.destination}}</a></td>
+                            <td> {{ a.start_date }}</td>
+                            <td> {{ a.end_date }}</td>
+                            <td>{{a.hosting_adventure.first_name}}  {{a.hosting_adventure.last_name}}</td>
+                            <td>{% for b in a.attending_adventure.all %}
+                                    {{b.first_name}}  {{b.last_name}}
+                                {% endfor %}
+                            </td>
+                            <td><a href="joinAdventure/{{a.id}}">Join Adventure</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>  
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>    
+</body>
+</html>

@@ -26,11 +26,11 @@ class AdventureManager(models.Manager):
             errors["plan"] = "Plan should be at least 3 characters"
         if datetime.strptime(postData['start_date'], "%Y-%m-%d") <= datetime.now():
             errors["start_date"] = "Unlikely adventure date: please enter some date after today."
-	    # elif:
-		#Birthday at least 13 years ago validation
-		# thirteen_years_ago = datetime.now() -timedelta(days=13*365)
+        # elif:
+        #Birthday at least 13 years ago validation
+        # thirteen_years_ago = datetime.now() -timedelta(days=13*365)
         if datetime.strptime(postData['start_date'], "%Y-%m-%d") >= datetime.strptime(postData['end_date'], "%Y-%m-%d"):
-			# messges.error(request, “Time travel is not an option. (Start date must be before end date)”, extra_tags=“birthday”)
+            # messages.error(request, “Time travel is not an option. (Start date must be before end date)”, extra_tags=“birthday”)
             errors["start_time"] = "Time Travel is not an option"
 
         return errors

@@ -15,3 +15,4 @@ please give your adventure a name and add dates for the adventure. If you add a 
 you can edit an adventure by clicking "Edit"-this will allow you to edit the dates of the adventure, name and details. 
 you can remove yourself from an adventure by clicking "Cancel".
 if you create an adventure it will add it to the list of adventures you are attending.  
+Thank you for participating in Pirate Adventures!

@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 from django.db import models
-from apps.log_reg_adventure_app.models import User
+from log_reg_adventure_app.models import User
 from datetime import datetime,timedelta
 import re
 
@@ -30,7 +30,6 @@ class AdventureManager(models.Manager):
         #Birthday at least 13 years ago validation
         # thirteen_years_ago = datetime.now() -timedelta(days=13*365)
         if datetime.strptime(postData['start_date'], "%Y-%m-%d") >= datetime.strptime(postData['end_date'], "%Y-%m-%d"):
-            # messages.error(request, “Time travel is not an option. (Start date must be before end date)”, extra_tags=“birthday”)
             errors["start_time"] = "Time Travel is not an option"
 
         return errors

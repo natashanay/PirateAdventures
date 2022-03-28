@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
-from apps.log_reg_adventure_app.models import User
-from apps.adventure_app.models import Adventure
+from log_reg_adventure_app.models import User
+from adventure_app.models import Adventure
 #Render Methds
 
 def PirateAdventure(request):

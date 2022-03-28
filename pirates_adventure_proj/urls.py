@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include	# added an import!
 
 urlpatterns = [
-    url(r'^pirates_adventure/', include('apps.adventure_app.urls')),	# use your app_name here
-    url(r'^', include('apps.log_reg_adventure_app.urls')),	# use your app_name here
+    url(r'^pirates_adventure/', include('adventure_app.urls')),	# use your app_name here
+    url(r'^', include('log_reg_adventure_app.urls')),	# use your app_name here
 
 ]

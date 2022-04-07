@@ -33,8 +33,8 @@
 ## Setup
 how to get started with the project.
 1. `install python 2.7.16`
-2. `pip install django 1.11.29`
-3. `pip install bcrypt 3.1.7`
+2. `pip install django == 1.11.29`
+3. `pip install bcrypt == 3.1.7`
 
 
 ## Usage
